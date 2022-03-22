@@ -2,11 +2,7 @@ import { NextPage } from "next";
 import { useState } from "react";
 import Select from "../components/Select";
 import Table from "../components/Table";
-
-interface Starship {
-  manufacturer: string[];
-  name: string;
-}
+import { Starship } from "../types/Starship";
 
 const Server: NextPage<{ data: any }> = ({ data }) => {
   const [manufacturer, setManufacturer] = useState<string>("");
