@@ -10,7 +10,7 @@ interface Starship {
 
 const Client: NextPage = () => {
   const [data, setData] = useState<any>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     setIsLoading(true);
