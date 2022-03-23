@@ -1,18 +1,26 @@
+import styles from "../styles/Table.module.css";
+
 interface ITableProps {
   rows: object[];
+  total: number;
 }
 
-const Table = ({ rows }: ITableProps) => {
+const Table = ({ rows, total }: ITableProps) => {
   if (rows.length) {
     return (
-      <table>
-        <TableHeader cells={rows[0]} />
-        <tbody>
-          {rows.map((row, i) => (
-            <TableRow key={i} cells={row} />
-          ))}
-        </tbody>
-      </table>
+      <div className={styles.container}>
+        <div
+          className={styles.counter}
+        >{`Displaying ${rows.length} of ${total}`}</div>
+        <table className={styles.table}>
+          <TableHeader cells={rows[0]} />
+          <tbody>
+            {rows.map((row, i) => (
+              <TableRow key={i} cells={row} />
+            ))}
+          </tbody>
+        </table>
+      </div>
     );
   }
 
@@ -25,7 +33,7 @@ interface IRowProps {
 
 const TableRow = ({ cells }: IRowProps) => {
   return (
-    <tr>
+    <tr className={styles.row}>
       {Object.entries(cells).map(([key, value], i) => (
         <TableCell key={i} data={value} />
       ))}
@@ -36,9 +44,11 @@ const TableRow = ({ cells }: IRowProps) => {
 const TableHeader = ({ cells }: IRowProps) => {
   return (
     <thead>
-      <tr>
+      <tr className={styles.row}>
         {Object.keys(cells).map((cell, i) => (
-          <th key={i}>{cell}</th>
+          <th key={i} className={styles.headerData}>
+            {cell}
+          </th>
         ))}
       </tr>
     </thead>
@@ -50,7 +60,11 @@ interface ICellProps {
 }
 
 const TableCell = ({ data }: ICellProps) => {
-  return <td>{data}</td>;
+  let display = data;
+  if (Array.isArray(data)) {
+    display = data.join(", ");
+  }
+  return <td className={styles.data}>{display}</td>;
 };
 
 export default Table;

@@ -1,0 +1,30 @@
+.container {
+  max-width: 2000px;
+  margin: 20px;
+}
+
+.counter {
+  padding: 20px 0;
+  float: right;
+}
+
+.table {
+  width: 100%;
+  table-layout: fixed;
+  word-wrap: break-word;
+}
+
+.row {
+  margin: 2px;
+}
+
+.data {
+  padding: 5px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.headerData {
+  background-color: #aa045f;
+  color: white;
+}

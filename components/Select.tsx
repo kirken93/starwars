@@ -1,3 +1,5 @@
+import styles from "../styles/Select.module.css";
+
 interface IProps {
   label: string;
   value: string;
@@ -9,10 +11,13 @@ interface IProps {
 
 const Select = ({ label, value, options, onChange, id, disabled }: IProps) => {
   return (
-    <>
-      <label htmlFor={id}>{label}</label>
+    <div className={styles.container}>
+      <label htmlFor={id} className={styles.label}>
+        {label}
+      </label>
       <select
         id={id}
+        className={styles.select}
         onChange={(e) => onChange(e.target.value)}
         value={value}
         disabled={disabled}
@@ -26,7 +31,7 @@ const Select = ({ label, value, options, onChange, id, disabled }: IProps) => {
           );
         })}
       </select>
-    </>
+    </div>
   );
 };
 

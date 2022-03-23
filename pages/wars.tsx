@@ -29,6 +29,12 @@ const Client: NextPage = () => {
 
   const [manufacturer, setManufacturer] = useState<string>("");
 
+  if (isLoading) {
+    return (
+      <div style={{ textAlign: "center", fontSize: "50px" }}>Loading...</div>
+    );
+  }
+
   const starships: Starship[] = data
     ? data.results.map((star: { manufacturer: string }) => {
         return {
@@ -51,12 +57,13 @@ const Client: NextPage = () => {
         value={manufacturer}
         options={starships
           .flatMap((s) => s.manufacturer)
-          .filter((v, i, a) => a.indexOf(v) === i)}
+          .filter((v, i, a) => a.indexOf(v) === i)
+          .sort()}
         onChange={setManufacturer}
         id="starship-select"
         disabled={isLoading}
       />
-      <Table rows={starshipsToUse} />
+      <Table rows={starshipsToUse} total={starships.length} />
     </div>
   );
 };

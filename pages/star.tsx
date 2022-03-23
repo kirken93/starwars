@@ -29,11 +29,12 @@ const Server: NextPage<{ data: any }> = ({ data }) => {
         value={manufacturer}
         options={starships
           .flatMap((s) => s.manufacturer)
-          .filter((v, i, a) => a.indexOf(v) === i)}
+          .filter((v, i, a) => a.indexOf(v) === i)
+          .sort()}
         onChange={setManufacturer}
         id="starship-select"
       />
-      <Table rows={starshipsToUse} />
+      <Table rows={starshipsToUse} total={starships.length} />
     </div>
   );
 };
