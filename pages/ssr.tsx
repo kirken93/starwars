@@ -4,7 +4,7 @@ import Select from "../components/Select";
 import Table from "../components/Table";
 import { Starship } from "../types/Starship";
 
-const Server: NextPage<{ data: any }> = ({ data }) => {
+const SSR: NextPage<{ data: any }> = ({ data }) => {
   const [manufacturer, setManufacturer] = useState<string>("");
 
   const starships: Starship[] = data.results.map(
@@ -55,4 +55,4 @@ export async function getServerSideProps() {
   return { props: { data } };
 }
 
-export default Server;
+export default SSR;
