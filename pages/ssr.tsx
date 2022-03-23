@@ -1,42 +1,9 @@
 import { NextPage } from "next";
-import { useState } from "react";
-import Select from "../components/Select";
-import Table from "../components/Table";
-import { Starship } from "../types/Starship";
+import ManufacturerSelect from "../components/ManufacturerSelect";
+import { Data } from "../types/Data";
 
-const SSR: NextPage<{ data: any }> = ({ data }) => {
-  const [manufacturer, setManufacturer] = useState<string>("");
-
-  const starships: Starship[] = data.results.map(
-    (star: { manufacturer: string }) => {
-      return {
-        ...star,
-        manufacturer: star.manufacturer.split(",").map((m) => m.trim())
-      };
-    }
-  );
-
-  const starshipsToUse = manufacturer
-    ? starships.filter((starship) =>
-        starship.manufacturer.some((m) => m === manufacturer)
-      )
-    : starships;
-
-  return (
-    <div>
-      <Select
-        label="Manufacturer"
-        value={manufacturer}
-        options={starships
-          .flatMap((s) => s.manufacturer)
-          .filter((v, i, a) => a.indexOf(v) === i)
-          .sort()}
-        onChange={setManufacturer}
-        id="starship-select"
-      />
-      <Table rows={starshipsToUse} total={starships.length} />
-    </div>
-  );
+const SSR: NextPage<{ data: Data }> = ({ data }) => {
+  return <ManufacturerSelect data={data} />;
 };
 
 export async function getServerSideProps() {
